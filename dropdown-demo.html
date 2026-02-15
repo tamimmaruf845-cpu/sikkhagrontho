@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Dropdown Demo - Sikkhagrontho</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600;700&family=Sora:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .demo-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            gap: 40px;
+        }
+
+        .demo-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .demo-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .demo-card p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .demo-btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: 1px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Sora', sans-serif;
+            font-weight: 500;
+        }
+
+        .demo-btn:hover {
+            background: var(--primary-color);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .demo-btn.logout-btn {
+            border-color: #ff4d4d;
+            color: #ff4d4d;
+        }
+
+        .demo-btn.logout-btn:hover {
+            background: #ff4d4d;
+            color: #fff;
+        }
+
+        .feature-list {
+            text-align: left;
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pattern-overlay"></div>
+
+    <!-- Navbar will be injected here -->
+
+    <div class="demo-container">
+        <div class="demo-card glass">
+            <h2>🎯 Profile Dropdown Demo</h2>
+            <p>This page demonstrates the new dynamic profile dropdown feature in the navbar.</p>
+
+            <div class="feature-list">
+                <strong>Features:</strong>
+                <ul>
+                    <li>✅ Circular profile avatar (top-right navbar)</li>
+                    <li>✅ Click avatar to open dropdown menu</li>
+                    <li>✅ Shows user info (name, email, avatar)</li>
+                    <li>✅ "My Profile" option → opens profile modal</li>
+                    <li>✅ "Logout" option → clears session & reloads</li>
+                    <li>✅ Click outside to close dropdown</li>
+                    <li>✅ Smooth animations & glassmorphic design</li>
+                    <li>✅ Responsive on mobile & desktop</li>
+                </ul>
+            </div>
+
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="simulateLogin()">Simulate Login</button>
+                <button class="demo-btn logout-btn" onclick="handleLogout()">Logout</button>
+                <button class="demo-btn" onclick="location.href='index.html'">Go to Homepage</button>
+            </div>
+
+            <div class="code-block">
+                <strong>Current User:</strong><br>
+                <span id="current-user-display">Not logged in</span>
+            </div>
+        </div>
+
+        <div class="demo-card glass">
+            <h2>📝 How It Works</h2>
+            <p><strong>When Logged Out:</strong></p>
+            <p>Navbar shows a "Login" button</p>
+
+            <p style="margin-top: 20px;"><strong>When Logged In:</strong></p>
+            <p>Navbar shows profile avatar with dropdown containing:</p>
+            <ul class="feature-list">
+                <li>User info header (avatar, name, email)</li>
+                <li>"My Profile" link with icon</li>
+                <li>"Logout" link with icon</li>
+            </ul>
+
+            <p style="margin-top: 20px;"><strong>Dropdown Behavior:</strong></p>
+            <ul class="feature-list">
+                <li>Click avatar → Toggle dropdown</li>
+                <li>Click outside → Close dropdown</li>
+                <li>Click "My Profile" → Open profile modal & close dropdown</li>
+                <li>Click "Logout" → Clear session & reload page</li>
+            </ul>
+        </div>
+
+        <div class="demo-card glass">
+            <h2>🔧 Technical Details</h2>
+            <p><strong>JavaScript Functions:</strong></p>
+            <div class="code-block">
+                toggleProfileDropdown(event)<br>
+                closeProfileDropdown()<br>
+                handleClickOutsideDropdown(event)<br>
+                handleLogout()
+            </div>
+
+            <p style="margin-top: 20px;"><strong>CSS Classes:</strong></p>
+            <div class="code-block">
+                .profile-dropdown-container<br>
+                .profile-dropdown<br>
+                .dropdown-header<br>
+                .dropdown-item<br>
+                .dropdown-show (animation class)
+            </div>
+
+            <p style="margin-top: 20px;"><strong>localStorage Keys:</strong></p>
+            <div class="code-block">
+                currentUser → Logged-in user data<br>
+                theme → Light/Dark preference
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal (from index.html) -->
+    <div id="profile-modal" class="modal-overlay hidden">
+        <div class="modal-container glass" style="max-width: 400px;">
+            <button class="modal-close" onclick="closeProfileModal()">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title">My Profile</h2>
+            </div>
+            <div class="modal-body profile-body">
+                <div class="profile-avatar-wrapper">
+                    <img id="profile-avatar" src="" alt="Profile" class="profile-avatar">
+                </div>
+                <h3 id="profile-name" class="profile-name">User Name</h3>
+                <p id="profile-role" class="profile-role">Student</p>
+
+                <div class="profile-details">
+                    <div class="profile-item">
+                        <span>ID:</span> <span id="profile-id">--</span>
+                    </div>
+                    <div class="profile-item">
+                        <span>Email:</span> <span id="profile-email">--</span>
+                    </div>
+                    <div class="profile-item">
+                        <span>Phone:</span> <span id="profile-phone">--</span>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="nav-btn" style="border: 1px solid var(--primary-color); background: transparent;"
+                        onclick="alert('Edit Profile Coming Soon')">Edit Profile</button>
+                    <button class="nav-btn" style="background: #ff4d4d; color: white;"
+                        onclick="handleLogout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Update current user display
+        function updateUserDisplay() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const display = document.getElementById('current-user-display');
+
+            if (currentUser) {
+                display.innerHTML = `
+                    <strong>Name:</strong> ${currentUser.name}<br>
+                    <strong>Email:</strong> ${currentUser.email}<br>
+                    <strong>Role:</strong> ${currentUser.role}
+                `;
+            } else {
+                display.textContent = 'Not logged in';
+            }
+        }
+
+        // Simulate login for demo
+        function simulateLogin() {
+            const demoUser = {
+                id: 'demo-' + Date.now(),
+                name: 'Demo User',
+                email: 'demo@sikkhagrontho.com',
+                role: 'student',
+                phone: '+8801234567890',
+                avatar: 'https://ui-avatars.com/api/?name=Demo+User&background=00f5ff&color=000'
+            };
+
+            localStorage.setItem('currentUser', JSON.stringify(demoUser));
+            location.reload();
+        }
+
+        // Update display on load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUserDisplay();
+        });
+    </script>
+</body>
+
+</html>

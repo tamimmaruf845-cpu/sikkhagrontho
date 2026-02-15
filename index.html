@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sikkhagrontho - Infinite is strength</title>
+    <meta name="description"
+        content="Sikkhagrontho - Your ultimate learning companion for HSC and Admission preparation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600;700&family=Sora:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="pattern-overlay"></div>
+
+    <header id="home" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Sikkhagrontho</h1>
+            <p class="hero-subtitle">Infinite is strength</p>
+            <div class="hero-btn-container">
+                <a href="explore.html" class="nav-btn hero-btn">Start Learning</a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator"
+            onclick="document.getElementById('hsc-subjects-container').scrollIntoView({behavior: 'smooth'})">
+            <div class="scroll-capsule">
+                <div class="scroll-dot"></div>
+            </div>
+            <div class="scroll-arrow"></div>
+        </div>
+    </header>
+
+    <section class="hsc-section">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-color);">HSC Subjects
+            List</h2>
+        <div id="hsc-subjects-container"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+            <!-- Injected by JS -->
+        </div>
+    </section>
+
+    <section style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-color);">Admission
+            Items</h2>
+        <div id="admission-items-container"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            <!-- Injected by JS -->
+        </div>
+    </section>
+
+    <!-- Premium Modal -->
+    <div id="premium-modal" class="modal-overlay hidden">
+        <div class="modal-container glass">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-header">
+                <h2 id="modal-title" class="modal-title">Subject Title</h2>
+                <div class="modal-subtitle" id="modal-subtitle">Category</div>
+            </div>
+            <div id="modal-body" class="modal-body">
+                <!-- Content injected here -->
+                <div class="coming-soon-wrapper" id="modal-content-wrapper">
+                    <div class="infinity-loader-modal">∞</div>
+                    <div class="modal-text-content">
+                        <h3 class="coming-soon-text">Coming Soon</h3>
+                        <p class="coming-soon-sub">We are crafting this content for you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay hidden">
+        <div class="modal-container glass" style="max-width: 400px;">
+            <button class="modal-close" onclick="closeLoginModal()">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title">Welcome Back</h2>
+                <div class="modal-subtitle">Login to Sikkhagrontho</div>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="handleLogin(event)" class="login-form">
+                    <div class="input-group">
+                        <input type="email" id="login-email" placeholder="Email" required class="glass-input">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="login-password" placeholder="Password" required class="glass-input">
+                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility()">👁️</button>
+                    </div>
+                    <button type="submit" class="hero-btn" style="width: 100%; margin-top: 10px;">Login</button>
+                    <p id="login-error" style="color: #ff4d4d; margin-top: 10px; font-size: 0.9em;"></p>
+                    <p style="text-align: center; margin-top: 15px; font-size: 0.9rem; opacity: 0.7;">
+                        Don't have an account? <a href="register.html"
+                            style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Register</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal-overlay hidden">
+        <div class="modal-container glass" style="max-width: 400px;">
+            <button class="modal-close" onclick="closeProfileModal()">×</button>
+            <div class="modal-header">
+                <h2 class="modal-title">My Profile</h2>
+            </div>
+            <div class="modal-body profile-body">
+                <div class="profile-avatar-wrapper">
+                    <img id="profile-avatar" src="" alt="Profile" class="profile-avatar">
+                </div>
+                <h3 id="profile-name" class="profile-name">User Name</h3>
+                <p id="profile-role" class="profile-role">Student</p>
+
+                <div class="profile-details">
+                    <div class="profile-item">
+                        <span>ID:</span> <span id="profile-id">--</span>
+                    </div>
+                    <div class="profile-item">
+                        <span>Email:</span> <span id="profile-email">--</span>
+                    </div>
+                    <div class="profile-item">
+                        <span>Phone:</span> <span id="profile-phone">--</span>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="nav-btn" style="border: 1px solid var(--primary-color); background: transparent;"
+                        onclick="alert('Edit Profile Coming Soon')">Edit Profile</button>
+                    <button class="nav-btn" style="background: #ff4d4d; color: white;"
+                        onclick="handleLogout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

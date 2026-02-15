@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Sikkhagrontho</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <style>
+        .modal {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            margin: 100px auto;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.5s ease-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #000;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pattern-overlay"></div>
+
+    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <div class="modal">
+            <span class="close-btn" onclick="window.history.back()">&times;</span>
+            <div class="profile-pic">
+                👤
+            </div>
+            <h2 style="margin-bottom: 10px;">Maruf Raihan</h2>
+            <p style="opacity: 0.8; margin-bottom: 5px;">ID: 2026-SG-001</p>
+            <p style="opacity: 0.8; margin-bottom: 20px;">maruf@sikkhagrontho.com</p>
+
+            <a href="#" style="color: var(--primary-color); text-decoration: none;">Edit Profile</a>
+        </div>
+    </div>
+</body>
+
+</html>

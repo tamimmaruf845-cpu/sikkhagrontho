@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Sikkhagrontho</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .admin-tab {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .admin-tab.active {
+            background: var(--primary-color);
+            color: #000;
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .item-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .admin-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-actions button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: var(--text-color);
+        }
+
+        .item-actions button.delete {
+            color: #ff4d4d;
+            border-color: #ff4d4d;
+        }
+
+        .add-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: grid;
+            gap: 15px;
+        }
+
+        .add-form input,
+        .add-form select,
+        .add-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pattern-overlay"></div>
+    <!-- Navbar injected by main.js -->
+
+    <div style="padding-top: 100px; min-height: 100vh;">
+        <div class="admin-container glass">
+            <div class="admin-header">
+                <h1>Admin Panel</h1>
+                <button onclick="window.location.href='index.html'" class="nav-btn">Back to Site</button>
+            </div>
+
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="switchTab('hsc')">HSC Subjects</button>
+                <button class="admin-tab" onclick="switchTab('admission')">Admission Items</button>
+                <button class="admin-tab" onclick="switchTab('explore')">Explore Content</button>
+                <button class="admin-tab" onclick="switchTab('users')">Users</button>
+            </div>
+
+            <!-- HSC Section -->
+            <div id="hsc-section" class="admin-section active">
+                <div class="add-form">
+                    <h3>Add New Subject</h3>
+                    <input type="text" id="hsc-title" placeholder="Subject Title">
+                    <input type="text" id="hsc-icon" placeholder="Icon (emoji)">
+                    <button onclick="addItem('hsc')" class="nav-btn"
+                        style="background: var(--primary-color); color: #000; width: fit-content;">Add Subject</button>
+                </div>
+                <div id="hsc-list" class="item-list"></div>
+            </div>
+
+            <!-- Admission Section -->
+            <div id="admission-section" class="admin-section">
+                <div class="add-form">
+                    <h3>Add Admission Item</h3>
+                    <input type="text" id="adm-title" placeholder="Item Title">
+                    <input type="text" id="adm-icon" placeholder="Icon (emoji)">
+                    <button onclick="addItem('admission')" class="nav-btn"
+                        style="background: var(--primary-color); color: #000; width: fit-content;">Add Item</button>
+                </div>
+                <div id="admission-list" class="item-list"></div>
+            </div>
+
+            <!-- Explore Section -->
+            <div id="explore-section" class="admin-section">
+                <div class="add-form">
+                    <h3>Add Explore Content</h3>
+                    <select id="exp-type">
+                        <option value="video">Video</option>
+                        <option value="pdf">PDF</option>
+                        <option value="info">Info</option>
+                    </select>
+                    <input type="text" id="exp-title" placeholder="Title">
+                    <textarea id="exp-desc" placeholder="Description"></textarea>
+                    <button onclick="addItem('explore')" class="nav-btn"
+                        style="background: var(--primary-color); color: #000; width: fit-content;">Add Content</button>
+                </div>
+                <div id="explore-list" class="item-list"></div>
+            </div>
+
+            <!-- Users Section -->
+            <div id="users-section" class="admin-section">
+                <h3 style="margin-bottom: 20px;">All Registered Users</h3>
+                <div id="users-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
