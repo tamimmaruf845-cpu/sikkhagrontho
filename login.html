@@ -90,26 +90,30 @@
 
             <form onsubmit="handleLogin(event)">
                 <div class="input-group">
-                    <input type="text" class="input-field" placeholder="Username" required>
+                    <input type="text" id="login-username" class="input-field" placeholder="Username / ID" required>
                 </div>
 
                 <div class="input-group">
-                    <input type="password" id="password" class="input-field" placeholder="Password" required>
-                    <span class="toggle-password" onclick="togglePassword()">👁️</span>
+                    <input type="password" id="login-password" class="input-field" placeholder="Password" required>
+                    <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
                 </div>
 
                 <button type="submit" class="login-submit">Login</button>
+                <p id="login-error" style="color: #ff4d4d; text-align: center; margin-top: 10px; font-size: 0.9rem;">
+                </p>
             </form>
 
             <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
-                Forgot Password? <a href="#" style="color: var(--primary-color); text-decoration: none;">Reset</a>
+                Don't have an account? <a href="register.html"
+                    style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Register</a>
             </p>
         </div>
     </div>
 
+    <script src="js/auth.js"></script>
     <script>
-        function togglePassword() {
-            const input = document.getElementById('password');
+        function togglePasswordVisibility() {
+            const input = document.getElementById('login-password');
             const icon = document.querySelector('.toggle-password');
             if (input.type === "password") {
                 input.type = "text";
@@ -119,24 +123,15 @@
                 icon.textContent = "👁️";
             }
         }
+
+        // Initialize theme
+        const theme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
     </script>
-<script>
-function handleLogin(event){
-    event.preventDefault();
+</body>
 
-    const username = document.querySelector('input[type="text"]').value;
-
-    const userData = {
-        name: username,
-        email: username + "@sikkhagrontho.com",
-        role: "student"
-    };
-
-    localStorage.setItem("currentUser", JSON.stringify(userData));
-
-    window.location.href = "index.html";
-}
-</script>
+</html>
 
 </body>
+
 </html>

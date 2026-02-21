@@ -114,29 +114,71 @@
     <div class="pattern-overlay"></div>
 
     <div class="register-container">
-        <div class="register-box glass">
+        <div class="register-box glass" style="max-width: 600px;">
             <h2>Join Sikkhagrontho</h2>
 
-            <form onsubmit="handleRegister(event)">
-                <div class="input-group">
-                    <input type="text" id="reg-name" class="input-field" placeholder="Full Name" required>
+            <form onsubmit="handleRegister(event)" id="register-form">
+                <div class="profile-photo-selection" style="text-align: center; margin-bottom: 25px;">
+                    <div class="avatar-circle" id="avatar-preview-container"
+                        style="width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1); margin: 0 auto; display: flex; align-items: center; justify-content: center; position: relative; border: 2px dashed var(--primary-color); cursor: pointer; overflow: hidden;">
+                        <span id="avatar-placeholder" style="font-size: 2rem; opacity: 0.5;">👤</span>
+                        <img id="avatar-preview" src="" alt="Preview"
+                            style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                        <div
+                            style="position: absolute; bottom: 0; background: rgba(0,0,0,0.5); width: 100%; font-size: 0.7rem; padding: 2px 0;">
+                            📷</div>
+                    </div>
+                    <input type="file" id="reg-photo" accept="image/*" style="display: none;"
+                        onchange="previewAvatar(this)">
+                    <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.6;">Profile Photo (Optional)</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <input type="text" id="reg-name" class="input-field" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="reg-username" class="input-field" placeholder="Username / ID" required>
+                    </div>
                 </div>
 
                 <div class="input-group">
-                    <input type="email" id="reg-email" class="input-field" placeholder="Email Address" required>
+                    <input type="text" id="reg-college" class="input-field" placeholder="College Name" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <input type="tel" id="reg-student-phone" class="input-field" placeholder="Student Phone"
+                            required>
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" id="reg-guardian-phone" class="input-field" placeholder="Guardian Phone"
+                            required>
+                    </div>
                 </div>
 
                 <div class="input-group">
-                    <input type="tel" id="reg-phone" class="input-field" placeholder="Phone Number" required>
+                    <select id="reg-blood" class="input-field" required style="background: rgba(10, 31, 68, 0.8);">
+                        <option value="" disabled selected>Blood Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
                 </div>
 
-                <div class="input-group">
-                    <input type="password" id="reg-password" class="input-field" placeholder="Password" required>
-                </div>
-
-                <div class="input-group">
-                    <input type="password" id="reg-confirm-password" class="input-field" placeholder="Confirm Password"
-                        required>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <input type="password" id="reg-password" class="input-field" placeholder="Password" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="reg-confirm-password" class="input-field" placeholder="Confirm"
+                            required>
+                    </div>
                 </div>
 
                 <button type="submit" class="register-submit">Create Account</button>
@@ -145,8 +187,7 @@
             </form>
 
             <p class="login-link">
-                Already have an account? <a href="javascript:void(0)"
-                    onclick="window.location.href='index.html'">Login</a>
+                Already have an account? <a href="index.html">Login</a>
             </p>
         </div>
     </div>
@@ -157,6 +198,25 @@
         // Initialize theme
         const theme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', theme);
+
+        document.getElementById('avatar-preview-container').onclick = () => {
+            document.getElementById('reg-photo').click();
+        };
+
+        function previewAvatar(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById('avatar-preview');
+                    const placeholder = document.getElementById('avatar-placeholder');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    placeholder.style.display = 'none';
+                    document.getElementById('avatar-preview-container').style.borderStyle = 'solid';
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 </body>
 

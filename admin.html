@@ -28,6 +28,7 @@
             margin-bottom: 30px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 10px;
+            flex-wrap: wrap;
         }
 
         .admin-tab {
@@ -38,6 +39,7 @@
             cursor: pointer;
             border-radius: 8px;
             transition: 0.3s;
+            margin-bottom: 5px;
         }
 
         .admin-tab.active {
@@ -118,8 +120,11 @@
             <div class="admin-tabs">
                 <button class="admin-tab active" onclick="switchTab('hsc')">HSC Subjects</button>
                 <button class="admin-tab" onclick="switchTab('admission')">Admission Items</button>
+                <button class="admin-tab" onclick="switchTab('defence')">Defence Items</button>
+                <button class="admin-tab" onclick="switchTab('novels')">Novels & Poems</button>
                 <button class="admin-tab" onclick="switchTab('explore')">Explore Content</button>
                 <button class="admin-tab" onclick="switchTab('users')">Users</button>
+                <button class="admin-tab" onclick="switchTab('scanner')">QR Scanner</button>
             </div>
 
             <!-- HSC Section -->
@@ -146,6 +151,30 @@
                 <div id="admission-list" class="item-list"></div>
             </div>
 
+            <!-- Defence Section -->
+            <div id="defence-section" class="admin-section">
+                <div class="add-form">
+                    <h3>Add Defence Item</h3>
+                    <input type="text" id="def-title" placeholder="Category (Army/Airforce/Navy)">
+                    <input type="text" id="def-icon" placeholder="Icon (emoji)">
+                    <button onclick="addItem('defence')" class="nav-btn"
+                        style="background: var(--primary-color); color: #000; width: fit-content;">Add Category</button>
+                </div>
+                <div id="defence-list" class="item-list"></div>
+            </div>
+
+            <!-- Novels Section -->
+            <div id="novels-section" class="admin-section">
+                <div class="add-form">
+                    <h3>Add Novel Category</h3>
+                    <input type="text" id="novel-title" placeholder="Category Name">
+                    <input type="text" id="novel-icon" placeholder="Icon (emoji)">
+                    <button onclick="addItem('novels')" class="nav-btn"
+                        style="background: var(--primary-color); color: #000; width: fit-content;">Add Category</button>
+                </div>
+                <div id="novels-list" class="item-list"></div>
+            </div>
+
             <!-- Explore Section -->
             <div id="explore-section" class="admin-section">
                 <div class="add-form">
@@ -168,11 +197,62 @@
                 <h3 style="margin-bottom: 20px;">All Registered Users</h3>
                 <div id="users-list"></div>
             </div>
+
+            <!-- Scanner Section -->
+            <div id="scanner-section" class="admin-section">
+                <h3 style="margin-bottom: 20px;">Scan User ID Card</h3>
+                <div id="reader"
+                    style="width: 100%; max-width: 500px; margin: 0 auto; border-radius: 12px; overflow: hidden;"></div>
+                <div id="scan-result"
+                    style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; display: none;">
+                    <h4>Scan Result</h4>
+                    <pre id="scan-data"
+                        style="color: var(--primary-color); white-space: pre-wrap; word-break: break-all;"></pre>
+                    <button id="view-scanned-profile" class="nav-btn" style="margin-top: 15px;">View Profile</button>
+                </div>
+            </div>
         </div>
     </div>
 
+    <script src="https://unpkg.com/html5-qrcode"></script>
     <script src="js/auth.js"></script>
     <script src="js/admin.js"></script>
+    <script>
+        // QR Scanner Logic
+        let html5QrcodeScanner;
+
+        function onScanSuccess(decodedText, decodedResult) {
+            console.log(`Code matched = ${decodedText}`, decodedResult);
+            document.getElementById('scan-result').style.display = 'block';
+
+            try {
+                const data = JSON.parse(decodedText);
+                document.getElementById('scan-data').textContent = JSON.stringify(data, null, 2);
+                document.getElementById('view-scanned-profile').onclick = () => {
+                    // In a real app we'd redirect to a specific user view
+                    alert('Viewing profile of: ' + data.name);
+                };
+            } catch (e) {
+                document.getElementById('scan-data').textContent = decodedText;
+            }
+        }
+
+        function onScanFailure(error) {
+            // handle scan failure, usually better to ignore and keep scanning
+        }
+
+        // Initialize scanner when tab is switched
+        const originalSwitchTab = switchTab;
+        switchTab = function (tabId) {
+            originalSwitchTab(tabId);
+            if (tabId === 'scanner') {
+                if (!html5QrcodeScanner) {
+                    html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: { width: 250, height: 250 } }, false);
+                    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+                }
+            }
+        };
+    </script>
 </body>
 
 </html>
