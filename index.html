@@ -41,8 +41,7 @@
     <section class="hsc-section">
         <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-color);">HSC Subjects
             List</h2>
-        <div id="hsc-subjects-container"
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+        <div id="hsc-subjects-container" class="subjects-grid">
             <!-- Injected by JS -->
         </div>
     </section>
@@ -50,8 +49,7 @@
     <section style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
         <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-color);">Admission
             Items</h2>
-        <div id="admission-items-container"
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+        <div id="admission-items-container" class="items-grid">
             <!-- Injected by JS -->
         </div>
     </section>
@@ -59,8 +57,7 @@
     <section style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
         <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-color);">Defence Items
         </h2>
-        <div id="defence-items-container"
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+        <div id="defence-items-container" class="items-grid">
             <!-- Injected by JS -->
         </div>
     </section>
@@ -68,8 +65,7 @@
     <section style="padding: 60px 20px; max-width: 1200px; margin: 0 auto;">
         <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-color);">Sikkha Novels
             and Poems</h2>
-        <div id="novels-container"
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+        <div id="novels-container" class="items-grid">
             <!-- Injected by JS -->
         </div>
     </section>
@@ -106,11 +102,12 @@
             <div class="modal-body">
                 <form onsubmit="handleLogin(event)" class="login-form">
                     <div class="input-group">
-                        <input type="email" id="login-email" placeholder="Email" required class="glass-input">
+                        <input type="text" id="login-username" placeholder="Username / ID" required class="glass-input">
                     </div>
                     <div class="input-group">
                         <input type="password" id="login-password" placeholder="Password" required class="glass-input">
-                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility()">👁️</button>
+                        <button type="button" class="password-toggle"
+                            onclick="togglePasswordVisibility('login-password')">👁️</button>
                     </div>
                     <button type="submit" class="hero-btn" style="width: 100%; margin-top: 10px;">Login</button>
                     <p id="login-error" style="color: #ff4d4d; margin-top: 10px; font-size: 0.9em;"></p>
